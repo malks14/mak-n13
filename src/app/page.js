@@ -1,16 +1,18 @@
+
 import api from "./api"
 import Head from "./Head";
+import Link from "next/link";
 
 export default async function Home() {
-  const links = await api.links.fetch();
+  const users = await api.user.list();
   return (
     <main>
-      <Head title="Links MAK" />
+      <Head title="users MAK" />
 
       <ul>
-        {links.map((link, i) => (
+        {users.map((user, i) => (
           <li key={i}>
-            <a href={link.url}>{link.label}</a>
+            <Link href={`/${user.slug}`}>{user.slug}</Link>
           </li>
         ))}
       </ul>
